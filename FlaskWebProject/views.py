@@ -33,13 +33,14 @@ def home():
 def new_post():
     form = PostForm(request.form)
     if form.validate_on_submit():
+        uploaded_file = request.files.get('image_path') 
         post = Post()
-        post.save_changes(form, request.files['image_path'], current_user.id, new=True)
+        post.save_changes(form, uploaded_file, current_user.id, new=True)
         return redirect(url_for('home'))
     return render_template(
         'post.html',
         title='Create Post',
-        imageSource=imageSourceUrl,
+        imageSource=None,
         form=form
     )
 
@@ -49,12 +50,13 @@ def post(id):
     post = Post.query.get(int(id))
     form = PostForm(formdata=request.form, obj=post)
     if form.validate_on_submit():
-        post.save_changes(form, request.files['image_path'], current_user.id)
+        uploaded_file = request.files.get('image_path') 
+        post.save_changes(form, uploaded_file, current_user.id)
         return redirect(url_for('home'))
     return render_template(
         'post.html',
         title='Edit Post',
-        imageSource=imageSourceUrl,
+        imageSource=None,
         form=form
     )
 
