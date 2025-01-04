@@ -94,7 +94,7 @@ def authorized():
             request.args['code'], scopes=Config.SCOPE,
             redirect_uri=url_for('authorized',_external=True,_scheme='https'))
         if "error" in result:
-            app.logger.warning('You are not authorised to use the database')
+            app.logger.error('You are not authorised to use the database')
             return render_template("auth_error.html", result=result)
         else:
             app.logger.info('You are authorised to use the database')
