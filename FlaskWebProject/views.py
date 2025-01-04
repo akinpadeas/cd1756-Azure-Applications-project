@@ -120,10 +120,10 @@ def logout():
 
 def _load_cache():
     cache = msal.SerializableTokenCache()
-    cache_file = os.path.join(os.getenv('HOME', '.'), 'cache.bin')
-    if os.path.exists(cache_file):
-        with open(cache_file,'r') as f:
-            cache.deserialize(f.read())
+    #cache_file = os.path.join(os.getenv('HOME', '.'), 'cache.bin')
+    #if os.path.exists(cache_file):
+    #    with open(cache_file,'r') as f:
+    #        cache.deserialize(f.read())
     return cache
 
 def _save_cache(cache):
