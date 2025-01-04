@@ -73,7 +73,7 @@ def login():
         if attempt:
             app.logger.info('Admin Login Successfully')
         else:
-            app.logger.warning('Login Attempt Failed')
+            app.logger.error('Login Attempt Failed')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
