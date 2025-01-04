@@ -94,7 +94,10 @@ def authorized():
             request.args['code'], scopes=Config.SCOPE,
             redirect_uri=url_for('authorized',_external=True,_scheme='https'))
         if "error" in result:
+            app.logger.warning('You are not authorised to use the database')
             return render_template("auth_error.html", result=result)
+        else:
+            app.logger.info('You are authorised to use the database')
         session["user"] = result.get("id_token_claims")
         # Note: In a real app, we'd use the 'name' property from session["user"] below
         # Here, we'll use the admin username for anyone who is authenticated by MS
