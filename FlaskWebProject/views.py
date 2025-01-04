@@ -92,7 +92,7 @@ def authorized():
         cache = _load_cache()
         result=_build_msal_app(cache=cache).acquire_token_by_authorization_code(
             request.args['code'], scopes=Config.SCOPE,
-            redirect_uri=Config.REDIRECT_URI + Config.REDIRECT_PATH #url_for('authorized',_external=True,_scheme='https'))
+            redirect_uri=url_for('authorized',_external=True,_scheme='https'))
         if "error" in result:
             app.logger.warning('You are not authorised to use the database')
             return render_template("auth_error.html", result=result)
