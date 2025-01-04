@@ -32,7 +32,7 @@ class Config(object):
 
     CLIENT_ID =  os.getenv("CLIENT_ID")
 
-    REDIRECT_PATH = "/getAToken"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
+    REDIRECT_PATH = "/getToken"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
     REDIRECT_URI = "https://localhost:5555"
 
     # You can find the proper permission names from this document
