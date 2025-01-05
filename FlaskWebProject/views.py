@@ -32,6 +32,7 @@ def home():
 @login_required
 def new_post():
     form = PostForm(request.form)
+    app.logger.info(f"checking for the content of form: {form}")
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path')
         app.logger.info("Form validated successfully.")
