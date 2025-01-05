@@ -37,7 +37,7 @@
                 {{ form.image_path.label }}<br>
                 {{ form.image_path }}
                 {% for error in form.image_path.errors %}
-                <span style="color: red;">{{ error.join(form.image_path.errors) }}</span>
+                <span style="color: red;">{{ error }}</span>
                 {% endfor %}
             </p>
         </div>
