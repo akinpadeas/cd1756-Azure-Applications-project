@@ -33,10 +33,14 @@ def home():
 def new_post():
     form = PostForm(request.form)
     if form.validate_on_submit():
-        uploaded_file = request.files.get('image_path') 
+        uploaded_file = request.files.get('image_path')
+        app.logger.info("Form validated successfully.")
         post = Post()
         post.save_changes(form, uploaded_file, current_user.id, new=True)
         return redirect(url_for('home'))
+    else:
+        app.logger.warning("Form validation failed.")
+        app.logger.warning(form.errors)
     return render_template(
         'post.html',
         title='Create Post',
