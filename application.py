@@ -22,7 +22,8 @@ if __name__ == '__main__':
 
     if ENV == 'production':
         # In production, Azure Web App handles host, port, and SSL
-        app.run()  # Let Azure manage the configuration
+        #app.run()  # Let Azure manage the configuration
+        app.run(debug=True)
     else:
         # Local development settings
         HOST = environ.get('SERVER_HOST', 'localhost')
