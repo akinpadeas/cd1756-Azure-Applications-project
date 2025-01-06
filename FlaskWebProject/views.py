@@ -15,6 +15,7 @@ import uuid
 
 
 imageSourceUrl = 'https://'+ app.config['BLOB_ACCOUNT']  + '.blob.core.windows.net/' + app.config['BLOB_CONTAINER']  + '/'
+#imageSourceUrl = 'https://cmsprod01.blob.core.windows.net/images'
 
 @app.route('/')
 @app.route('/home')
@@ -42,10 +43,11 @@ def new_post():
     else:
         app.logger.warning("Form validation failed.")
         app.logger.warning(form.errors)
+
     return render_template(
         'post.html',
         title='Create Post',
-        imageSource=None,
+        imageSource=imageSourceUrl,
         form=form
     )
 
@@ -58,10 +60,11 @@ def post(id):
         uploaded_file = request.files.get('image_path') 
         post.save_changes(form, uploaded_file, current_user.id)
         return redirect(url_for('home'))
+        
     return render_template(
         'post.html',
         title='Edit Post',
-        imageSource=None,
+        imageSource=imageSourceUrl,
         form=form
     )
 
