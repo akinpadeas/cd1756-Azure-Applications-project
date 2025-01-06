@@ -55,6 +55,7 @@ def new_post():
         app.logger.warning("Form validation failed.")
         app.logger.warning(form.errors)
         
+    app.logger.warning("HERE IS THE IMAGESOURCE: %s", imageSource) 
     return render_template(
         'post.html',
         title='Create Post',
@@ -72,7 +73,10 @@ def post(id):
         post.save_changes(form, uploaded_file, current_user.id)
         return redirect(url_for('home'))
         
-    imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}" if post.image_path else None   
+    imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}" if post.image_path else None
+    app.logger.warning("HERE IS THE IMAGESOURCE: %s", imageSource)
+    app.logger.warning("HERE IS THE POST.IMAGE_PATH: %s", post.image_path)
+    
     return render_template(
         'post.html',
         title='Edit Post',
