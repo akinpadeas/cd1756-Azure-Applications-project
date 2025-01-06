@@ -16,6 +16,7 @@ import uuid
 
 imageSourceUrl = 'https://'+ app.config['BLOB_ACCOUNT']  + '.blob.core.windows.net/' + app.config['BLOB_CONTAINER']  + '/'
 app.logger.warning("HERE IS THE IMAGESOURCEURL: %s", imageSourceUrl)
+#https://cmsprod01.blob.core.windows.net/images/
 #app.logger.warning("Login failed: %s", form.errors)
 #imageSourceUrl = 'https://cmsprod01.blob.core.windows.net/images'
 
@@ -34,6 +35,7 @@ def home():
 @app.route('/new_post', methods=['GET', 'POST'])
 @login_required
 def new_post():
+    app.logger.warning("HERE IS THE IMAGEPATH RAW: %s", request.form)
     form = PostForm(request.form)
     app.logger.warning("HERE IS THE IMAGEPATH: %s", form.image_path.data)
     if form.validate_on_submit():
