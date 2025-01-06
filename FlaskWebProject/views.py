@@ -98,7 +98,7 @@ def login():
             return redirect(url_for('login'))
         attempt = login_user(user, remember=form.remember_me.data)
         if attempt:
-            app.logger.warning('ADMIN LOGN SUCCESSFULLY')
+            app.logger.warning('ADMIN LOGGED IN SUCCESSFULLY')
         else:
             app.logger.error('Login Attempt Failed')
         next_page = request.args.get('next')
