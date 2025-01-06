@@ -94,10 +94,11 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
+            app.logger.warning("INVALID LOGIN ATTEMPT")
             return redirect(url_for('login'))
         attempt = login_user(user, remember=form.remember_me.data)
         if attempt:
-            app.logger.info('Admin Login Successfully')
+            app.logger.warning('ADMIN LOGN SUCCESSFULLY')
         else:
             app.logger.error('Login Attempt Failed')
         next_page = request.args.get('next')
