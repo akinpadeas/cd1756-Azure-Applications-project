@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-4">
             {% if imageSource %}
-            <p><img src="{{ imageSource }}" width="250" height="250" /></p>
+            <p><img src="{{ imageSource }}" style="max-width: 100%; height: auto;" /></p>
             {% endif %}
             <p>
                 {{ form.image_path.label }}<br>
