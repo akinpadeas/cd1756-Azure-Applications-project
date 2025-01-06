@@ -15,6 +15,8 @@ import uuid
 
 
 imageSourceUrl = 'https://'+ app.config['BLOB_ACCOUNT']  + '.blob.core.windows.net/' + app.config['BLOB_CONTAINER']  + '/'
+app.logger.warning("HERE IS THE IMAGESOURCEURL: %s", imageSourceUrl)
+#app.logger.warning("Login failed: %s", form.errors)
 #imageSourceUrl = 'https://cmsprod01.blob.core.windows.net/images'
 
 @app.route('/')
@@ -33,7 +35,7 @@ def home():
 @login_required
 def new_post():
     form = PostForm(request.form)
-    app.logger.info(f"checking for the content of form: {form}")
+    app.logger.warning("HERE IS THE IMAGEPATH: %s", form.image_path.data)
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path')
         app.logger.info("Form validated successfully.")
