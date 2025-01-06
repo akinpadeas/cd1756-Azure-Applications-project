@@ -40,6 +40,8 @@ def new_post():
     form = PostForm()
     app.logger.warning("HERE IS THE FORM IMAGEPATH DATA : %s", form.image_path.data)
     app.logger.warning("HERE IS THE REQUEST.FILE: %s", request.files)
+
+    imageSource = None
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path')
         app.logger.info("Form validated successfully.")
@@ -49,11 +51,14 @@ def new_post():
     else:
         app.logger.warning("Form validation failed.")
         app.logger.warning(form.errors)
-
+    
+    if post.image_path:
+            imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}"
+        
     return render_template(
         'post.html',
         title='Create Post',
-        imageSource=imageSourceUrl,
+        imageSource=imageSource,
         form=form
     )
 
@@ -67,10 +72,11 @@ def post(id):
         post.save_changes(form, uploaded_file, current_user.id)
         return redirect(url_for('home'))
         
+    imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}" if post.image_path else None   
     return render_template(
         'post.html',
         title='Edit Post',
-        imageSource=imageSourceUrl,
+        imageSource=imageSource,
         form=form
     )
 
