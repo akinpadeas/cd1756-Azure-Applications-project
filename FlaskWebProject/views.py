@@ -47,13 +47,13 @@ def new_post():
         app.logger.info("Form validated successfully.")
         post = Post()
         post.save_changes(form, uploaded_file, current_user.id, new=True)
+
+        if post.image_path:
+            imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}"
         return redirect(url_for('home'))
     else:
         app.logger.warning("Form validation failed.")
         app.logger.warning(form.errors)
-    
-    if post.image_path:
-            imageSource = f"https://cmsprod01.blob.core.windows.net/images/{post.image_path}"
         
     return render_template(
         'post.html',
