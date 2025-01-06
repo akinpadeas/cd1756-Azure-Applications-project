@@ -11,6 +11,23 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+    def validate(self):
+        # Call the parent class's validate method
+        initial_validation = super(LoginForm, self).validate()
+        if not initial_validation:
+            return False
+
+        # Custom validation for username and password
+        if len(self.username.data) < 3:
+            self.username.errors.append("Username must be at least 2 characters long.")
+            return False
+
+        if len(self.password.data) < 3:
+            self.password.errors.append("Password must be at least 3 characters long.")
+            return False
+
+        return True
+
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     author = StringField('Author', validators=[DataRequired()])
