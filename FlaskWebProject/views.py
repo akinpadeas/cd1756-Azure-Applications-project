@@ -36,7 +36,8 @@ def home():
 @login_required
 def new_post():
     app.logger.warning("HERE IS THE IMAGEPATH RAW: %s", request.form)
-    form = PostForm(request.form)
+    app.logger.warning("HERE IS THE REQUEST RAW: %s", request)
+    form = PostForm()
     app.logger.warning("HERE IS THE IMAGEPATH: %s", form.image_path.data)
     app.logger.warning("HERE IS THE REQUEST.FILE: %s", request.files)
     if form.validate_on_submit():
@@ -60,7 +61,7 @@ def new_post():
 @login_required
 def post(id):
     post = Post.query.get(int(id))
-    form = PostForm(formdata=request.form, obj=post)
+    form = PostForm(obj=post)
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path') 
         post.save_changes(form, uploaded_file, current_user.id)
