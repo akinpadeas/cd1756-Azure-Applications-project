@@ -52,7 +52,7 @@ def new_post():
     return render_template(
         'post.html',
         title='Create Post',
-        imageSource=imageSourceUrl + uploaded_file,
+        imageSource=imageSourceUrl,
         form=form
     )
 
