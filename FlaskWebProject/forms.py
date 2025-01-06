@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
-    def validate(self):
+    def validate(self, extra_validators=None):
         # Call the parent class's validate method
         initial_validation = super(LoginForm, self).validate()
         if not initial_validation:
