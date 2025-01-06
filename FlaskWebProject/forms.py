@@ -17,3 +17,17 @@ class PostForm(FlaskForm):
     body = TextAreaField('Body', validators=[DataRequired()])
     image_path = FileField('Image', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
     submit = SubmitField('Save')
+
+    def validate(self, extra_validators=None):
+        initial_validation = super(PostForm, self).validate(extra_validators)
+        if not initial_validation:
+            return False
+
+        # Additional custom validations
+        if self.image_path.data:
+            file = self.image_path.data
+            if not file.filename.lower().endswith(('jpg', 'png')):
+                self.image_path.errors.append("Only .jpg and .png files are allowed.")
+                return False
+
+        return True
