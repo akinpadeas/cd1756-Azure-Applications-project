@@ -35,10 +35,10 @@ def home():
 @app.route('/new_post', methods=['GET', 'POST'])
 @login_required
 def new_post():
-    app.logger.warning("HERE IS THE IMAGEPATH RAW: %s", request.form)
+    app.logger.warning("HERE IS THE REQUEST.FORM: %s", request.form)
     app.logger.warning("HERE IS THE REQUEST RAW: %s", request)
     form = PostForm()
-    app.logger.warning("HERE IS THE IMAGEPATH: %s", form.image_path.data)
+    app.logger.warning("HERE IS THE FORM IMAGEPATH DATA : %s", form.image_path.data)
     app.logger.warning("HERE IS THE REQUEST.FILE: %s", request.files)
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path')
