@@ -38,6 +38,7 @@ def new_post():
     app.logger.warning("HERE IS THE IMAGEPATH RAW: %s", request.form)
     form = PostForm(request.form)
     app.logger.warning("HERE IS THE IMAGEPATH: %s", form.image_path.data)
+    app.logger.warning("HERE IS THE REQUEST.FILE: %s", request.files)
     if form.validate_on_submit():
         uploaded_file = request.files.get('image_path')
         app.logger.info("Form validated successfully.")
@@ -51,7 +52,7 @@ def new_post():
     return render_template(
         'post.html',
         title='Create Post',
-        imageSource=imageSourceUrl,
+        imageSource=imageSourceUrl + uploaded_file,
         form=form
     )
 
