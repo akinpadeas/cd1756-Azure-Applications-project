@@ -19,7 +19,7 @@ class PostForm(FlaskForm):
     submit = SubmitField('Save')
 
     def validate(self, extra_validators=None):
-        initial_validation = super(PostForm, self).validate(extra_validators)
+        initial_validation = super(PostForm, self).validate()
         if not initial_validation:
             return False
 
